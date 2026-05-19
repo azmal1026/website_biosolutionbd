@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - BioSolution BD{% endblock %}
+
+{% block content %}
+<div class="hero-section text-center">
+    <div class="container">
+        {% if content %}
+            <h1 class="display-4">{{ content.title }}</h1>
+            <p class="lead mt-3">{{ content.content|linebreaksbr }}</p>
+            {% if content.image %}
+                <img src="{{ content.image.url }}" alt="{{ content.title }}" class="img-fluid rounded mt-4" style="max-height: 400px; object-fit: cover;">
+            {% endif %}
+        {% else %}
+            <h1 class="display-4">Welcome to BioSolution BD</h1>
+            <p class="lead mt-3">Your trusted partner in Bioinformatics solutions.</p>
+            <p class="text-muted">(Please add Home page content via the admin panel)</p>
+        {% endif %}
+        <div class="mt-4">
+            <a href="{% url 'services' %}" class="btn btn-primary btn-lg">Explore Services</a>
+            <a href="{% url 'contact' %}" class="btn btn-outline-secondary btn-lg ms-2">Contact Us</a>
+        </div>
+    </div>
+</div>
+
+<div class="container mb-5">
+    <h2 class="text-center mb-4">Our Top Services</h2>
+    <div class="row">
+        {% for service in services %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                {% if service.image %}
+                <img src="{{ service.image.url }}" class="card-img-top" alt="{{ service.title }}" style="height: 200px; object-fit: cover;">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ service.title }}</h5>
+                    <p class="card-text">{{ service.description|truncatewords:20 }}</p>
+                    <a href="{% url 'services' %}" class="btn btn-outline-primary btn-sm">Read More</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12 text-center text-muted">
+            <p>No services added yet. Please add them via the admin panel.</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
