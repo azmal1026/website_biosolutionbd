@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}About Us - BioSolution BD{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row align-items-center">
+        {% if content %}
+            <div class="col-lg-{% if content.image %}6{% else %}12{% endif %}">
+                <h1 class="mb-4">{{ content.title }}</h1>
+                <div class="lead" style="white-space: pre-wrap;">{{ content.content }}</div>
+            </div>
+            {% if content.image %}
+            <div class="col-lg-6 mt-4 mt-lg-0">
+                <img src="{{ content.image.url }}" alt="{{ content.title }}" class="img-fluid rounded shadow">
+            </div>
+            {% endif %}
+        {% else %}
+            <div class="col-12 text-center">
+                <h1 class="mb-4">About Us</h1>
+                <p class="lead">Information about BioSolution BD will go here.</p>
+                <p class="text-muted">(Please add About Us page content via the admin panel)</p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
